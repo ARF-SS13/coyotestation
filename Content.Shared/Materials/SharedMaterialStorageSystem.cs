@@ -296,7 +296,6 @@ public abstract class SharedMaterialStorageSystem : EntitySystem
     // Frontier: partial stack insertion
     /// <summary>
     /// Tries to insert as much of an entity as possible into the material storage.
-    /// Only happens if there is a storage limit.
     /// </summary>
     public virtual bool TryInsertMaxPossibleMaterialEntity(EntityUid user,
         EntityUid toInsert,
@@ -320,16 +319,30 @@ public abstract class SharedMaterialStorageSystem : EntitySystem
             return false;
 
         int multiplier;
-        if (storage.StorageLimit is null || !HasComp<StackComponent>(toInsert)) // this function only runs if insterting already failed somehow, only consider splitting if the storage has a storage limit
-            return false;
-
-        var availableVolume = (int)storage.StorageLimit - GetTotalMaterialAmount(receiver, storage);
-        var volumePerSheet = 0;
-        foreach (var (_, vol) in composition.MaterialComposition)
+        if (storage.StorageLimit is not null && TryComp<StackComponent>(toInsert, out var stack))
         {
-            volumePerSheet += vol;
+            var availableVolume = (int)storage.StorageLimit - GetTotalMaterialAmount(receiver, storage);
+            var volumePerSheet = 0;
+            foreach (var (_, vol) in composition.MaterialComposition)
+            {
+                volumePerSheet += vol;
+            }
+            multiplier = availableVolume / volumePerSheet;
+            if (multiplier >= stack.Count)
+            {
+                empty = true;
+                multiplier = stack.Count;
+            }
         }
-        multiplier = availableVolume / volumePerSheet;
+        else
+        {
+            multiplier = TryComp<StackComponent>(toInsert, out var stackComponent) ? stackComponent.Count : 1;
+            empty = true;
+        }
+
+        // Inserting into a full container (or with a lingering stack)
+        if (multiplier <= 0)
+            return false;
 
         // Inserting into a full container (or with a lingering stack)
         if (multiplier <= 0)
@@ -363,9 +376,8 @@ public abstract class SharedMaterialStorageSystem : EntitySystem
         _appearance.SetData(receiver, MaterialStorageVisuals.Inserting, true);
         Dirty(receiver, insertingComp);
 
-
-        _sharedStackSystem.Use(toInsert, multiplier);
-
+        if (!empty)
+            _sharedStackSystem.Use(toInsert, multiplier);
 
         var ev = new MaterialEntityInsertedEvent(material);
         RaiseLocalEvent(receiver, ref ev);
