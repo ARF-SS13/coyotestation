@@ -2,7 +2,7 @@
 
 Frontier Station 14 is a fork of [Space Station 14](https://github.com/space-wizards/space-station-14) that runs on [Robust Toolbox](https://github.com/space-wizards/RobustToolbox) engine written in C#.
 
-This is the primary repo for Frontier Station 14.
+This is built off of the primary repo for Frontier Station 14, with work done by Floof/Fansana and crew.
 
 If you want to host or create content for FS14, this is the repo you need. It contains both RobustToolbox and the content pack for development of new content packs.
 
