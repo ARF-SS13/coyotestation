@@ -322,3 +322,51 @@
             max: 5
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+
+# Backup RTG - no fuel requirement designed to have just enough juice to limp back home
+
+- type: entity
+  parent: GeneratorRTG
+  id: EmergencyGeneratorRTG
+  name: Emergency RTG
+  description: An Emergency Radioisotope Thermoelectric Generator for long term power. It features enhanced durability at the cost of power output.
+  suffix: 5kW
+  components:
+  - type: PowerSupplier
+    supplyRate: 5000 # very low power - just enough to limp home if you're stranded or keep the lights on if you want to sit idle out in space for a long time.
+  - type: Sprite
+    sprite: Structures/Power/Generation/rtg.rsi
+    state: rtg
+  - type: PowerMonitoringDevice
+    sprite: Structures/Power/Generation/rtg.rsi
+    state: rtg
+  - type: AmbientSound
+    range: 5
+    sound:
+      path: /Audio/Ambience/Objects/buzzing.ogg
+  - type: GuideHelp
+    guides:
+    - RTG
+    - Power
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1200
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 600
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          GeneratorRTGDamaged:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
