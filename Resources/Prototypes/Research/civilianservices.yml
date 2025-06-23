@@ -149,8 +149,8 @@
   recipeUnlocks:
   - BorgModuleAdvancedTreatment
   - BorgModuleDefibrillator
-  - BorgModuleAdvancedParamedic # Frontier
-  - MedicalTechFabCircuitboard
+  - BorgModuleAdvancedParamedic
+  # - MedicalTechFabCircuitboard
 
 - type: technology
   id: AdvancedCleaning
