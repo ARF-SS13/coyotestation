@@ -563,10 +563,10 @@
       - StasisBedMachineCircuitboard
       - OreProcessorIndustrialMachineCircuitboard
       - CargoTelepadMachineCircuitboard
-      - AmmoTechFabCircuitboard
-      - MedicalTechFabCircuitboard
-      - MercenaryTechFabCircuitboardNF
-      - EngineeringTechFabCircuitboard
+      # - AmmoTechFabCircuitboard Hey, Vide Noir?  How about you go fuck yourself.  Yeah? ~ Fenny
+      # - MedicalTechFabCircuitboard
+      # - MercenaryTechFabCircuitboardNF
+      # - EngineeringTechFabCircuitboard
       - RipleyCentralElectronics
       - RipleyPeripheralsElectronics
       - HonkerCentralElectronics

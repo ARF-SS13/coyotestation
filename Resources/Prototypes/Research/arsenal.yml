@@ -74,26 +74,26 @@
   # - AmmoTechFabCircuitboard
 
 
-- type: technology
-  id: UraniumMunitions
-  name: research-technology-uranium-munitions
-  icon:
-    sprite: Objects/Materials/Sheets/other.rsi
-    state: uranium
-  discipline: Arsenal
-  tier: 1
-  cost: 7500
-  recipeUnlocks:
-  - MagazineRifleUranium
-  - MagazinePistolUranium
-  - MagazineLightRifleUranium
-  - SpeedLoaderMagnumUranium
-  - MagazineBoxPistolUranium
-  - MagazineBoxMagnumUranium
-  - MagazineBoxLightRifleUranium
-  - MagazineBoxRifleUranium
-  - BoxShotgunUranium
-  - SpeedLoaderRifleHeavyUranium # Frontier
+# - type: technology
+#   id: UraniumMunitions
+#   name: research-technology-uranium-munitions
+#   icon:
+#     sprite: Objects/Materials/Sheets/other.rsi
+#     state: uranium
+#   discipline: Arsenal
+#   tier: 1
+#   cost: 7500
+#   recipeUnlocks:
+#   - MagazineRifleUranium
+#   - MagazinePistolUranium
+#   - MagazineLightRifleUranium
+#   - SpeedLoaderMagnumUranium
+#   - MagazineBoxPistolUranium
+#   - MagazineBoxMagnumUranium
+#   - MagazineBoxLightRifleUranium
+#   - MagazineBoxRifleUranium
+#   - BoxShotgunUranium
+#   - SpeedLoaderRifleHeavyUranium
 
 - type: technology
   id: AdvancedRiotControl
