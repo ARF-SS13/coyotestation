@@ -35,6 +35,9 @@
   - type: NpcFactionMember
     factions:
       - NanoTrasen
+
+  - type: LayingDown
+
   - type: StandingState
   - type: MobState
     allowedStates:
