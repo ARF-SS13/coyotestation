@@ -256,7 +256,7 @@ public sealed class HTNSystem : EntitySystem
         }
     }
 
-    // Frontier: prevent unneded NPC activity
+   // Frontier: prevent unneded NPC activity
     private bool IsNPCActive(EntityUid entity)
     {
         var transform = Transform(entity);
