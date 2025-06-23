@@ -49,7 +49,6 @@
   - ShipyardStasis
   - ShipyardTide
   - ShipyardVagabond
-  - ShipyardPhantom
 
 - type: guideEntry
   id: ShipyardAkupara
@@ -275,8 +274,3 @@
   id: ShipyardTide
   name: guide-entry-shipyard-tide
   text: "/ServerInfo/_NF/Guidebook/Shipyard/Tide.xml"
-
-- type: guideEntry
-  id: ShipyardPhantom
-  name: guide-entry-shipyard-phantom
-  text: "/ServerInfo/_NF/Guidebook/Shipyard/Phantom.xml"
