@@ -13,11 +13,17 @@
   text: "/ServerInfo/Guidebook/NewPlayer/Controls/Controls.xml"
   children:
   - Radio
+  - Roleplay
 
 - type: guideEntry
   id: Radio
   name: guide-entry-radio
-  text: "/ServerInfo/Guidebook/NewPlayer/Controls/Radio.xml" 
+  text: "/ServerInfo/Guidebook/NewPlayer/Controls/Radio.xml"
+
+- type: guideEntry
+  id: Roleplay
+  name: guide-entry-roleplay
+  text: "/ServerInfo/Guidebook/NewPlayer/Controls/Roleplay.xml"
 
 - type: guideEntry
   id: CharacterCreation
@@ -25,7 +31,7 @@
   text: "/ServerInfo/Guidebook/NewPlayer/CharacterCreation.xml"
   children:
   - YourFirstCharacter
-  - Species 
+  - Species
 
 - type: guideEntry
   id: YourFirstCharacter
