@@ -85,10 +85,4 @@ public sealed class AnomalySystem : SharedAnomalySystem
         sprite.Scale = Vector2.One;
         sprite.Color = sprite.Color.WithAlpha(1f);
     }
-
-    // Frontier: crystal spawning (NOOP, done on server)
-    protected override void SpawnCrystals(Entity<AnomalyComponent> ent)
-    {
-    }
-    // End Frontier
 }

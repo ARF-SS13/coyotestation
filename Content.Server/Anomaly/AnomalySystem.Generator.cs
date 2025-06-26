@@ -11,7 +11,6 @@ using Robust.Shared.Map.Components;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Content.Shared.Power;
-using Content.Server.Chat.Systems; // Frontier
 
 namespace Content.Server.Anomaly;
 
@@ -24,7 +23,6 @@ public sealed partial class AnomalySystem
 {
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly ChatSystem _chat = default!; // Frontier
 
     private void InitializeGenerator()
     {
@@ -84,7 +82,7 @@ public sealed partial class AnomalySystem
         UpdateGeneratorUi(uid, component);
     }
 
-    public void SpawnOnRandomGridLocation(EntityUid grid, string toSpawn, Entity<AnomalyGeneratorComponent>? generator = null) // Frontier: add generator
+    public void SpawnOnRandomGridLocation(EntityUid grid, string toSpawn)
     {
         if (!TryComp<MapGridComponent>(grid, out var gridComp))
             return;
@@ -93,12 +91,11 @@ public sealed partial class AnomalySystem
 
         var targetCoords = xform.Coordinates;
         var gridBounds = gridComp.LocalAABB.Scale(_configuration.GetCVar(CCVars.AnomalyGenerationGridBoundsScale));
-        bool validTarget = false; // Frontier
 
-        for (var i = 0; i < 20; i++) // Frontier: 25<20
+        for (var i = 0; i < 25; i++)
         {
             var randomX = Random.Next((int) gridBounds.Left, (int) gridBounds.Right);
-            var randomY = Random.Next((int) gridBounds.Bottom, (int) gridBounds.Top);
+            var randomY = Random.Next((int) gridBounds.Bottom, (int)gridBounds.Top);
 
             var tile = new Vector2i(randomX, randomY);
 
@@ -151,38 +148,8 @@ public sealed partial class AnomalySystem
                 continue;
 
             targetCoords = pos;
-            validTarget = true; // Frontier
             break;
         }
-
-        // Frontier: one final test - if the spawn point is within an anti-anomaly zone, just don't generate it.
-        if (!validTarget) // Frontier
-        {
-            var mapPos = _transform.ToMapCoordinates(targetCoords);
-            var antiAnomalyZonesQueue = AllEntityQuery<AntiAnomalyZoneComponent, TransformComponent>();
-            while (antiAnomalyZonesQueue.MoveNext(out _, out var zone, out var antiXform))
-            {
-                if (antiXform.MapID != mapPos.MapId)
-                    continue;
-
-                var antiCoordinates = _transform.GetWorldPosition(antiXform);
-
-                var delta = antiCoordinates - mapPos.Position;
-                if (delta.LengthSquared() < zone.ZoneRadius * zone.ZoneRadius)
-                {
-                    if (generator is { } genEnt
-                        && TryComp(genEnt, out TransformComponent? generatorXform))
-                    {
-                        _stack.Spawn(genEnt.Comp.RefundAmount, genEnt.Comp.RefundStackType, generatorXform.Coordinates);
-                        genEnt.Comp.CooldownEndTime = TimeSpan.Zero;
-                        UpdateGeneratorUi(genEnt, genEnt.Comp);
-                        _chat.TrySendInGameICMessage(genEnt, Loc.GetString("anomaly-generator-refund-message"), InGameICChatType.Speak, hideChat: true);
-                    }
-                    return;
-                }
-            }
-        }
-        // End Frontier: one final test - if the spawn point is within an anti-anomaly zone, just don't generate it.
 
         Spawn(toSpawn, targetCoords);
     }
@@ -199,7 +166,7 @@ public sealed partial class AnomalySystem
         if (xform.GridUid == null)
             return;
 
-        SpawnOnRandomGridLocation(xform.GridUid.Value, component.SpawnerPrototype, (uid, component)); // Frontier: add (uid, component)
+        SpawnOnRandomGridLocation(xform.GridUid.Value, component.SpawnerPrototype);
         RemComp<GeneratingAnomalyGeneratorComponent>(uid);
         Appearance.SetData(uid, AnomalyGeneratorVisuals.Generating, false);
         Audio.PlayPvs(component.GeneratingFinishedSound, uid);

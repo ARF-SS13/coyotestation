@@ -100,7 +100,7 @@
     drawdepth: Mobs
   - type: SpriteFade
   - type: AnomalyVessel
-    pointMultiplier: 1.25 # Frontier: 2<1.25
+    pointMultiplier: 2
   - type: RadiationSource
     intensity: 0.75
     slope: 0.1
@@ -163,20 +163,18 @@
   - type: Emitter
     onState: firing
     powerUseActive: 100
-    # Frontier: use NF prefixes
-    boltType: NFAnomalousParticleDelta
+    boltType: AnomalousParticleDelta
     underpoweredState: underpowered
     selectableTypes:
-    - NFAnomalousParticleDelta
-    - NFAnomalousParticleEpsilon
-    - NFAnomalousParticleZeta
-    - NFAnomalousParticleSigma
+    - AnomalousParticleDelta
+    - AnomalousParticleEpsilon
+    - AnomalousParticleZeta
+    - AnomalousParticleSigma
     setTypePorts:
-      SetParticleDelta: NFAnomalousParticleDelta
-      SetParticleEpsilon: NFAnomalousParticleEpsilon
-      SetParticleZeta: NFAnomalousParticleZeta
-      SetParticleSigma: NFAnomalousParticleSigma
-    # End Frontier: use NF prefixes
+      SetParticleDelta: AnomalousParticleDelta
+      SetParticleEpsilon: AnomalousParticleEpsilon
+      SetParticleZeta: AnomalousParticleZeta
+      SetParticleSigma: AnomalousParticleSigma
     fireBurstSize: 1
     baseFireBurstDelayMin: 2
     baseFireBurstDelayMax: 6
@@ -219,12 +217,10 @@
       - SetParticleEpsilon
       - SetParticleZeta
       - SetParticleSigma
-  - type: BindToStation # Frontier
-    enabled: false # Frontier - should be draggable between stations
 
 - type: entity
   id: MachineAnomalyGenerator
-  parent: [BaseMachinePowered]
+  parent: [BaseStructureDisableToolUse, BaseMachinePowered] # Frontier - BaseStructureDisableToolUse
   name: anomaly generator
   description: The peak of pseudoscientific technology.
   placement:
@@ -275,11 +271,7 @@
         - RawMaterial # Frontier
     materialWhiteList:
 #    - Plasma # Frontier
-    - Anomalite # Frontier
-    storage: # Frontier
-      Anomalite: 300 # Frontier: one free charge
-    storageLimit: 300 # Frontier: one charge
-  # - type: OreSiloClient # Frontier
+    - Bananium # Frontier
   - type: Fixtures
     fixtures:
       fix1:
@@ -338,17 +330,3 @@
   - type: GuideHelp
     guides:
     - AnomalousResearch
-  # Frontier: extra anomaly generator fields
-  - type: BindToStation
-  - type: TypingIndicator
-    proto: robot
-  - type: Speech
-    speechVerb: Robotic
-    speechSounds: Borg
-  - type: SpookySpeaker
-    messageSet: SpookySpeakerMessagesAnomalyGenerator
-    speakChance: 0.25
-  - type: SentienceTarget
-    flavorKind: station-event-random-sentience-flavor-mechanical
-    weight: 0.2 # 5 anomaly generators = 1 animal
-  # End Frontier: extra anomaly generator fields

@@ -113,7 +113,6 @@
         collection: BananiumHorn
         params:
           volume: 5
-      crystalPrototype: null # Frontier
     - type: Input
       context: "human"
     - type: Bloodstream
