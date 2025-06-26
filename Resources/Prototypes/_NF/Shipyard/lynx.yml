@@ -13,10 +13,10 @@
   parent: BaseVessel
   name: FAT Lynx
   description: A tandem seat two crew Mercenary fighter. Simple, straight forward, and capable.  If incredibly small.
-  price: 23,000
+  price: 23000
   category: Small
   group: Shipyard
-  shuttlePath: /Maps/_NF/Shuttles/Coyote/lynx.yml
+  shuttlePath: /Maps/_NF/Shuttles/Coyote/Mercenary/lynx.yml
   class:
   - Fighter
   engine:
@@ -25,7 +25,7 @@
 - type: gameMap
   id: Lynx
   mapName: 'Lynx'
-  mapPath: Maps/_NF/Shuttles/Coyote/lynx.yml
+  mapPath: /Maps/_NF/Shuttles/Coyote/Mercenary/lynx.yml
   minPlayers: 0
   stations:
     Lynx:
