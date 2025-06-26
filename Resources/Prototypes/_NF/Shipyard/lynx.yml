@@ -1,0 +1,42 @@
+# Author Info
+# GitHub: tk420634
+# Discord: fenny8008
+
+# Maintainer Info
+# GitHub: tk420634
+# Discord: fenny8008
+
+# Shuttle Notes:
+#
+- type: vessel
+  id: Lynx
+  parent: BaseVessel
+  name: FAT Lynx
+  description: A tandem seat two crew Mercenary fighter. Simple, straight forward, and capable.  If incredibly small.
+  price: 23,000
+  category: Small
+  group: Shipyard
+  shuttlePath: /Maps/_NF/Shuttles/Coyote/lynx.yml
+  class:
+  - Fighter
+  engine:
+  - APU
+
+- type: gameMap
+  id: Lynx
+  mapName: 'Lynx'
+  mapPath: Maps/_NF/Shuttles/Coyote/lynx.yml
+  minPlayers: 0
+  stations:
+    Lynx:
+      stationProto: StandardFrontierVessel
+      components:
+      - type: StationNameSetup
+        mapNameTemplate: 'Lynx {1}'
+        nameGenerator: !type:NanotrasenNameGenerator
+          prefixCreator: '14'
+      - type: StationJobs
+        availableJobs:
+          Contractor: [ 0, 0 ]
+          Pilot: [ 0, 0 ]
+          Mercenary: [ 0, 0 ]
