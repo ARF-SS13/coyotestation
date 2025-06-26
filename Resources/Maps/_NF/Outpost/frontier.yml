@@ -35,7 +35,7 @@ entities:
   - uid: 2173
     components:
     - type: MetaData
-      name: Flooftier Outpost
+      name: Redwater Outpost
     - type: Transform
       parent: 5691
     - type: MapGrid
