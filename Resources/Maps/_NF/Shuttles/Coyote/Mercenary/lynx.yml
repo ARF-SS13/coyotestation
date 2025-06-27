@@ -175,10 +175,9 @@ entities:
       parent: 1
 - proto: AirlockGlassShuttle
   entities:
-  - uid: 65
+  - uid: 56
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 1.5,-3.5
       parent: 1
 - proto: AlwaysPoweredlightGreen
