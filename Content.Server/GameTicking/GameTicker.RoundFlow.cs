@@ -287,6 +287,7 @@ namespace Content.Server.GameTicking
             UpdateLateJoinStatus();
             AnnounceRound();
             UpdateInfoText();
+            RaiseLocalEvent(new RoundStartedEvent(RoundId));
             SendRoundStartedDiscordMessage();
 
 #if EXCEPTION_TOLERANCE
@@ -451,6 +452,7 @@ namespace Content.Server.GameTicking
 
             _replayRoundPlayerInfo = listOfPlayerInfoFinal;
             _replayRoundText = roundEndText;
+            RaiseLocalEvent(new RoundEndedEvent(RoundId, roundDuration));
         }
 
         private async void SendRoundEndDiscordMessage()
